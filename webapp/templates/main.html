@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html>
+
+<head>
+
+<title>Web app name</title>
+
+</head>
+<body>
+  <table>
+    {% for key,value in data.iterrows() %}
+    <tr>
+      <td>
+        <table>
+          <tr>
+          {{value['NewNameP1']}}
+          </tr>
+          <tr>
+            <td>{{value['AvgP1']}}</td>
+            <td>{{value['ActualRankingP1']}}</td>
+          </tr>
+        </table>
+
+      </td>
+      <td>
+        <table>
+          <tr>
+          {{value['NewNameP2']}}
+          </tr>
+          <tr>
+            <td>{{value['AvgP2']}}</td>
+            <td>{{value['ActualRankingP2']}}</td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+
+</html>
