@@ -3,44 +3,58 @@
 <html>
 
 <head>
-
-<title>Web app name</title>
-
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-  <table>
-    {% for key,value in data.iterrows() %}
-    <tr>
-      <td>
+  {% for key,value in data.iterrows() %}
+  <div class="match">
+    <div class="match-photos">
+      <img id="player1-photo" src="{{value['PhotoP1']}}" alt="" >
+      <img id="icon-png" src="{{url_for('static', filename='versus-icon.png')}}" >
+      <img id="player2-photo" src="{{value['PhotoP2']}}" alt="">
+    </div>
+    <div class="players">
+      <div class="player1">
+        <div class="player-name">
+          {{value['NewNameP1']}}
+        </div>
         <div class="player-image">
-          <img src="{{value['PhotoP1']}}" alt="" width="145px" height="230px">
+
         </div>
         <div class="player-info">
-            <div class="player-name">
-              {{value['NewNameP1']}}
-            </div>
             <div class="player-rank">
-              ATP: {{value['ActualRankingP1']}}
+              RANK: {{value['ActualRankingP1']}}
+            </div>
+            <div class="player-hand">
+              HAND: {{value['HandednessP1']}}
+            </div>
+            <div class="player-odd">
+              ODD: {{value['AvgP1']}}
             </div>
         </div>
-      </td>
-      <td><img src="{{url_for('static', filename='versus_icon.jpg')}}" width="128" height="128"></td>
-      <td>
+      </div>
+      <div class="player2">
+        <div class="player-name">
+          {{value['NewNameP2']}}
+        </div>
         <div class="player-image">
-          <img src="{{value['PhotoP2']}}" alt="" width="145px" height="230px">
+
         </div>
         <div class="player-info">
-            <div class="player-name">
-              {{value['NewNameP2']}}
-            </div>
-            <div class="player-rank">
-              ATP: {{value['ActualRankingP2']}}
-            </div>
+          <div class="player-rank">
+            RANK: {{value['ActualRankingP2']}}
+          </div>
+          <div class="player-hand">
+            HAND: {{value['HandednessP2']}}
+          </div>
+          <div class="player-odd">
+            ODD: {{value['AvgP2']}}
+          </div>
         </div>
-      </td>
-    </tr>
-    {% endfor %}
-  </table>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 </body>
 
 </html>

@@ -1,0 +1,55 @@
+body{
+  color: black ;
+
+}
+
+div.match{
+
+  height:350px;
+  padding-left: 30%;
+  padding-right: 30%;
+
+}
+
+div.match-photos{
+  display:flex;
+  justify-content: center;
+}
+
+div.players{
+  display: flex;
+  flex-direction: row;
+}
+
+div.player1{
+  width: 50%;
+}
+
+div.player2{
+  width:50%;
+  text-align: right;
+}
+
+
+#player1-photo{
+  /*position:absolute;*/
+  z-index:0;
+  width:174px;
+  height:276px;
+}
+#player2-photo{
+  /*position:absolute;
+  padding-left: 190px;*/
+  z-index:0;
+  width:174px;
+  height:276px;
+}
+
+#icon-png{
+  /*position:absolute;
+  padding-left: 120px;*/
+  z-index:1;
+  padding-top:50px;
+  width:150px;
+  height:150px;
+}
