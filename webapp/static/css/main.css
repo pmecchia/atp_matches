@@ -63,16 +63,17 @@ div.player2{
   display: flex;
 }
 
+
 .cta {
     display: flex;
-    padding: 10px 45px;
+    padding: 1vh 1.5vw;
     text-decoration: none;
     font-family: 'Poppins', sans-serif;
-    font-size: 20px;
+    font-size: 2.2vh;
     color: white;
     background: #6225E6;
     transition: 1s;
-    box-shadow: 6px 6px 0 black;
+    box-shadow: 1vh 1vh 0 black;
     transform: skewX(-15deg);
 }
 
@@ -82,7 +83,7 @@ div.player2{
 
 .cta:hover {
     transition: 0.5s;
-    box-shadow: 10px 10px 0 #FBC638;
+    box-shadow: 1.5vh 1vh 0 #FBC638;
 }
 
 .cta span:nth-child(2) {
@@ -92,7 +93,7 @@ div.player2{
 
 .cta:hover  span:nth-child(2) {
     transition: 0.5s;
-    margin-right: 45px;
+    margin-right: 3vw;
 }
 
   span {
@@ -100,26 +101,33 @@ div.player2{
   }
 
   span:nth-child(2) {
-    width: 20px;
-    margin-left: 15px;
+    width: 0.5vw;
+    margin-left: 1vw;
     position: relative;
-    top: 12%;
   }
 
 /**************SVG****************/
+svg{
+  width:7vw;
+  height:2vh;
+  /*outline: 1px solid red*/
+}
 
 text.one {
+    font-size: 2.2vh;
     transition: 0.4s;
-    transform: translateX(-75%);
+    transform: translateX(-15%);
 }
 
 text.two {
+    font-size: 2.2vh;
     transition: 0.5s;
-    transform: translateX(-45%);
+    transform: translateX(-5%);
 }
 text.three {
+    font-size: 2.2vh;
     transition: 0.5s;
-    transform: translateX(-270%);
+    transform: translateX(-70%);
 
 }
 
