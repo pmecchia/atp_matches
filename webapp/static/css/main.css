@@ -3,75 +3,125 @@ body{
 
 }
 
-div.match{
-
-  height:550px;
-  padding-left: 30%;
-  padding-right: 30%;
-
-}
-
-div.match-photos{
-  display:flex;
-  justify-content: center;
-}
-
-div.players{
+div.opponents{
   display: flex;
-  flex-direction: row
+  justify-content: center;
+  height:56.5vh;
+  padding-left: 10%;
+  padding-right: 10%;
+
 }
 
-div.player1{
+div.prediction{
+  display: flex;
+  height: 15vh;
+  border-bottom: solid 0.2vh #cdd1ce;
+  border-top:solid 0.2vh #cdd1ce;
+  flex-direction: row;
+}
+div.player-prediction{
+  display: flex;
+  width: 25%;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5vw;
+  color: #878686;
+}
+div.prediction-title{
+  display: flex;
   width: 50%;
+  justify-content: center;
+  align-items: center;
+  font-size: 2vw;
+  font-weight: bold;
+  color: #878686;
 }
 
-div.player2{
-  width:50%;
+div.player{
+  display: flex;
+
+}
+
+div.versus{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+div.location{
+  text-align: center;
+  font-size: 1.5vw;
+  color: #cdd1ce;
+}
+
+div.player-name{
+
+  font-size: 2vw;
+  font-weight: bold;
+  padding-bottom:5vh;
+}
+#player2-name{
   text-align: right;
+}
+#player1-name{
+  text-align: left;
+}
+div.player-info{
+  align-self: flex-end;
+  width:25vw;
+  padding-right: 1vw;
 
 }
+
+
 
 
 #player1-photo{
   /*position:absolute;*/
   z-index:0;
-  width:174px;
-  height:276px;
+  width:14.5vw;
+  height:56.5vh;
 }
 #player2-photo{
   /*position:absolute;
   padding-left: 190px;*/
   z-index:0;
-  width:174px;
-  height:276px;
+  width:14.5vw;
+  height:56.5vh;
 }
 
 #icon-png{
   /*position:absolute;
   padding-left: 120px;*/
   z-index:1;
-  padding-top:50px;
-  width:150px;
-  height:150px;
+  width:13.5vw;
+  height:30vh;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:900i');
 
 
 
-.wrapper {
-  display: flex;
-}
 
+.wrapper-player1{
+  display: flex;
+  padding-bottom: 1.5vh;
+}
+.wrapper-player2{
+  display: flex;
+  padding-bottom: 1.5vh;
+  justify-content: flex-end;
+}
 
 .cta {
     display: flex;
     padding: 1vh 1.5vw;
     text-decoration: none;
     font-family: 'Poppins', sans-serif;
-    font-size: 2.2vh;
+    font-size: 0.8vw;
     color: white;
-    background: #6225E6;
+    background: #878686;
     transition: 1s;
     box-shadow: 1vh 1vh 0 black;
     transform: skewX(-15deg);
@@ -96,7 +146,7 @@ div.player2{
     margin-right: 3vw;
 }
 
-  span {
+  .sp-wrapper {
     transform: skewX(15deg)
   }
 
@@ -114,20 +164,20 @@ svg{
 }
 
 text.one {
-    font-size: 2.2vh;
+    font-size: 0.8vw;
     transition: 0.4s;
     transform: translateX(-15%);
 }
 
 text.two {
-    font-size: 2.2vh;
+    font-size: 0.8vw;
     transition: 0.5s;
     transform: translateX(-5%);
 }
 text.three {
-    font-size: 2.2vh;
+    font-size: 0.8vw;
     transition: 0.5s;
-    transform: translateX(-70%);
+    transform: translateX(-100%);
 
 }
 
