@@ -1,6 +1,46 @@
+@font-face {
+  font-family: 'bieksa';
+  src: url('../fonts/bieksa-font/BieksaFreeTrial-RpdWE.otf');
+}
+@font-face {
+  font-family: 'chopsic';
+  src: url('../fonts/chopsic/Chopsic-K6Dp.ttf');
+}
+@font-face {
+  font-family: 'sheepingCats';
+  src: url('../fonts/sheeping-cats-font/SheepingCats-929Z.ttf');
+}
+
+
 body{
   color: black ;
-
+  margin: 0;
+}
+.header{
+  display: flex;
+  overflow: hidden;
+  background-color: black;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+  height: 15vh;
+  z-index: 3;
+  justify-content: center;
+  align-items: center;
+}
+span.title{
+  color: white;
+  font-family: 'chopsic';
+  font-size: 3vw;
+}
+.matches-list{
+  padding-top: 15vh;
+}
+.match{
+  background-color: #f7f7f7;
+}
+.match:hover{
+  background-color: white;
 }
 
 div.opponents{
@@ -29,12 +69,21 @@ div.player-prediction{
 }
 div.prediction-title{
   display: flex;
+  flex-direction: column;
   width: 50%;
   justify-content: center;
   align-items: center;
+
+}
+#prediction{
   font-size: 2vw;
   font-weight: bold;
   color: #878686;
+}
+
+#not-completed{
+  font-size: 1vw;
+  color: #cdd1ce;
 }
 
 div.player{
@@ -77,18 +126,21 @@ div.player-info{
 
 
 
-#player1-photo{
-  /*position:absolute;*/
-  z-index:0;
-  width:14.5vw;
-  height:56.5vh;
-}
-#player2-photo{
+.player-body{
   /*position:absolute;
   padding-left: 190px;*/
   z-index:0;
   width:14.5vw;
   height:56.5vh;
+}
+
+.player-face{
+  /*position:absolute;
+  padding-left: 190px;*/
+  z-index:0;
+  width:14.5vw;
+  height:33vh;
+  padding-top: 11vh;
 }
 
 #icon-png{
@@ -98,7 +150,16 @@ div.player-info{
   width:13.5vw;
   height:30vh;
 }
-
+#check-png{
+  width: 4vw;
+  height: 4vh;
+  padding-top: 1vh;
+}
+#cross-png{
+  width: 4vw;
+  height: 4vh;
+  padding-top: 1vh;
+}
 @import url('https://fonts.googleapis.com/css?family=Poppins:900i');
 
 

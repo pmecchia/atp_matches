@@ -4,127 +4,147 @@
 
 <head>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
 </head>
 <body>
-  {% for key,value in data.iterrows() %}
-  <div class="match">
-    <div class="opponents">
-      <div class="player">
-        <div class="player-photo">
-          <img id="player1-photo" src="{{value['PhotoP1']}}" alt="" >
-        </div>
-        <div class="player-info">
-          <div id="player1-name" class="player-name">
-            <span>{{value['NewNameP1']}}</span>
-          </div>
-          <div class="wrapper-player1">
-            <a class="cta" href="#">
-              <span class="sp-wrapper">RANK</span>
-              <span class="sp-wrapper">
-                <svg  viewBox="0 0 10vx 10vh"  >
-                  <text x="35%" y="2vh" class="three" fill="#FFFFFF">{{value['ActualRankingP1']}}</text>
-                  <text x="15%" y="1.5vh" class="one" fill="#FFFFFF">></text>
-                  <text x="5%" y="1.5vh" class="two" fill="#FFFFFF">></text>
-                </svg>
-              </span>
-            </a>
-          </div>
-          <div class="wrapper-player1">
-            <a class="cta" href="#">
-              <span class="sp-wrapper">HAND</span>
-              <span class="sp-wrapper">
-                <svg  viewBox="0 0 10vx 10vh"  >
-                  <text x="35%" y="2vh" class="three" fill="#FFFFFF">{{value['HandednessP1'][0]}}</text>
-                  <text x="15%" y="1.5vh" class="one" fill="#FFFFFF">></text>
-                  <text x="5%" y="1.5vh" class="two" fill="#FFFFFF">></text>
-                </svg>
-              </span>
-            </a>
-          </div>
-          <div class="wrapper-player1">
-            <a class="cta" href="#">
-              <span class="sp-wrapper">ODD</span>
-              <span class="sp-wrapper">
-                <svg  viewBox="0 0 10vx 10vh"  >
-                  <text x="28%" y="2vh" class="three" fill="#FFFFFF">{{value['AvgP1']}}</text>
-                  <text x="15%" y="1.5vh" class="one" fill="#FFFFFF">></text>
-                  <text x="5%" y="1.5vh" class="two" fill="#FFFFFF">></text>
-                </svg>
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="versus">
-
-        <div class="location">
-            <span>ATP {{value['Location']}}</span>
-        </div>
-        <div class="icon">
-          <img id="icon-png" src="{{url_for('static', filename='versus-icon.png')}}" >
-        </div>
-
-      </div>
-      <div class="player">
-        <div class="player-info">
-          <div id="player2-name" class="player-name">
-            <span>{{value['NewNameP2']}}</span>
-          </div>
-          <div class="wrapper-player2">
-            <a class="cta" href="#">
-              <span class="sp-wrapper">RANK</span>
-              <span class="sp-wrapper">
-                <svg  viewBox="0 0 10vx 10vh"  >
-                  <text x="35%" y="2vh" class="three" fill="#FFFFFF">{{value['ActualRankingP2']}}</text>
-                  <text x="15%" y="1.5vh" class="one" fill="#FFFFFF">></text>
-                  <text x="5%" y="1.5vh" class="two" fill="#FFFFFF">></text>
-                </svg>
-              </span>
-            </a>
-          </div>
-          <div class="wrapper-player2">
-            <a class="cta" href="#">
-              <span class="sp-wrapper">HAND</span>
-              <span class="sp-wrapper">
-                <svg  viewBox="0 0 10vx 10vh"  >
-                  <text x="35%" y="2vh" class="three" fill="#FFFFFF">{{value['HandednessP2'][0]}}</text>
-                  <text x="15%" y="1.5vh" class="one" fill="#FFFFFF">></text>
-                  <text x="5%" y="1.5vh" class="two" fill="#FFFFFF">></text>
-                </svg>
-              </span>
-            </a>
-          </div>
-          <div class="wrapper-player2">
-            <a class="cta" href="#">
-              <span class="sp-wrapper">ODD</span>
-              <span class="sp-wrapper">
-                <svg viewBox="0 0 10vx 10vh">
-                  <text x="28%" y="2vh" class="three" fill="#FFFFFF">{{value['AvgP2']}}</text>
-                  <text x="15%" y="1.5vh" class="one" fill="#FFFFFF">></text>
-                  <text x="5%" y="1.5vh" class="two" fill="#FFFFFF">></text>
-                </svg>
-              </span>
-            </a>
-          </div>
-        </div>
-        <div class="player-photo">
-          <img id="player2-photo" src="{{value['PhotoP2']}}" alt="">
-        </div>
-      </div>
-    </div>
-    <div class="prediction">
-      <div class="player-prediction">
-        <span>{{'%0.3f'|format(value['PredictP1']|float)}}</span>
-      </div>
-      <div class="prediction-title">
-        <span>PREDICTION</span>
-      </div>
-      <div class="player-prediction">
-        <span>{{'%0.3f'|format(value['PredictP2']|float)}}</span>
-      </div>
-    </div>
+  <div class="header">
+    <span class="title">ATP PREDICTIONS</span>
   </div>
-  {% endfor %}
+  <div class="matches-list">
+    {% for key,value in data.iterrows() %}
+    <div class="match">
+      <div class="opponents">
+        <div class="player">
+          <div class="player-photo">
+            <img class='{{"player-body" if "full" in value['PhotoP1'] else "player-face"}}' src="{{value['PhotoP1']}}" alt="" >
+          </div>
+          <div class="player-info">
+            <div id="player1-name" class="player-name">
+              <span>{{value['NewNameP1']}}</span>
+            </div>
+            <div class="wrapper-player1">
+              <a class="cta" href="#">
+                <span class="sp-wrapper">RANK</span>
+                <span class="sp-wrapper">
+                  <svg  viewBox="0 0 10vx 10vh"  >
+                    <text x="35%" y="1.5vh" class="three" fill="#FFFFFF">{{value['ActualRankingP1']}}</text>
+                    <text x="15%" y="1.3vh" class="one" fill="#FFFFFF">></text>
+                    <text x="5%" y="1.3vh" class="two" fill="#FFFFFF">></text>
+                  </svg>
+                </span>
+              </a>
+            </div>
+            <div class="wrapper-player1">
+              <a class="cta" href="#">
+                <span class="sp-wrapper">HAND</span>
+                <span class="sp-wrapper">
+                  <svg  viewBox="0 0 10vx 10vh"  >
+                    <text x="35%" y="1.5vh" class="three" fill="#FFFFFF">{{value['HandednessP1'][0]}}</text>
+                    <text x="15%" y="1.3vh" class="one" fill="#FFFFFF">></text>
+                    <text x="5%" y="1.3vh" class="two" fill="#FFFFFF">></text>
+                  </svg>
+                </span>
+              </a>
+            </div>
+            <div class="wrapper-player1">
+              <a class="cta" href="#">
+                <span class="sp-wrapper">ODD</span>
+                <span class="sp-wrapper">
+                  <svg  viewBox="0 0 10vx 10vh"  >
+                    <text x="28%" y="1.5vh" class="three" fill="#FFFFFF">{{value['AvgP1']}}</text>
+                    <text x="15%" y="1.3vh" class="one" fill="#FFFFFF">></text>
+                    <text x="5%" y="1.3vh" class="two" fill="#FFFFFF">></text>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="versus">
+
+          <div class="location">
+              <span>ATP {{value['Location']}}</span>
+          </div>
+          <div class="icon">
+            <img id="icon-png" src="{{url_for('static', filename='versus-icon.png')}}" >
+          </div>
+
+        </div>
+        <div class="player">
+          <div class="player-info">
+            <div id="player2-name" class="player-name">
+              <span>{{value['NewNameP2']}}</span>
+            </div>
+            <div class="wrapper-player2">
+              <a class="cta" href="#">
+                <span class="sp-wrapper">RANK</span>
+                <span class="sp-wrapper">
+                  <svg  viewBox="0 0 10vx 10vh"  >
+                    <text x="35%" y="1.5vh" class="three" fill="#FFFFFF">{{value['ActualRankingP2']}}</text>
+                    <text x="15%" y="1.3vh" class="one" fill="#FFFFFF">></text>
+                    <text x="5%" y="1.3vh" class="two" fill="#FFFFFF">></text>
+                  </svg>
+                </span>
+              </a>
+            </div>
+            <div class="wrapper-player2">
+              <a class="cta" href="#">
+                <span class="sp-wrapper">HAND</span>
+                <span class="sp-wrapper">
+                  <svg  viewBox="0 0 10vx 10vh"  >
+                    <text x="35%" y="1.5vh" class="three" fill="#FFFFFF">{{value['HandednessP2'][0]}}</text>
+                    <text x="15%" y="1.3vh" class="one" fill="#FFFFFF">></text>
+                    <text x="5%" y="1.3vh" class="two" fill="#FFFFFF">></text>
+                  </svg>
+                </span>
+              </a>
+            </div>
+            <div class="wrapper-player2">
+              <a class="cta" href="#">
+                <span class="sp-wrapper">ODD</span>
+                <span class="sp-wrapper">
+                  <svg viewBox="0 0 10vx 10vh">
+                    <text x="28%" y="1.5vh" class="three" fill="#FFFFFF">{{value['AvgP2']}}</text>
+                    <text x="15%" y="1.3vh" class="one" fill="#FFFFFF">></text>
+                    <text x="5%" y="1.3vh" class="two" fill="#FFFFFF">></text>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="player-photo">
+            <img class='{{"player-body" if "full" in value['PhotoP2'] else "player-face"}}' src="{{value['PhotoP2']}}" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="prediction">
+        <div class="player-prediction">
+          <span>{{'%0.3f'|format(value['PredictP1']|float)}}</span>
+        </div>
+        <div class="prediction-title">
+          <span id="prediction">PREDICTION</span>
+
+          {%if ((value['P1Winner'] == 1) and (value['PredictP1']>0.5))  %}
+            <img id="check-png" src="{{url_for('static', filename='checkmark.png')}}" >
+          {%elif ((value['P1Winner'] == 0) and (value['PredictP1'] < 0.5)) %}
+            <img id="check-png" src="{{url_for('static', filename='checkmark.png')}}" >
+          {%elif ((value['P1Winner'] == 1) and (value['PredictP1'] < 0.5)) %}
+            <img id="cross-png" src="{{url_for('static', filename='crossmark.png')}}" >
+          {%elif ((value['P1Winner'] == 0) and (value['PredictP1'] > 0.5)) %}
+            <img id="cross-png" src="{{url_for('static', filename='crossmark.png')}}" >
+          {%else%}
+            <p id="not-completed">Match not completed</p>
+          {% endif %}
+
+        </div>
+        <div class="player-prediction">
+          <span>{{'%0.3f'|format(1-value['PredictP1']|float)}}</span>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
 </body>
 
 </html>
