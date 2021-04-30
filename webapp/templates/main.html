@@ -14,6 +14,7 @@
     {% for key,value in data.iterrows() %}
     <div class="match">
       <div class="opponents">
+        <img  class="background" src="{{url_for('static', filename='clay.jpg')}}" >
         <div class="player">
           <div class="player-photo">
             <img class='{{"player-body" if "full" in value['PhotoP1'] else "player-face"}}' src="{{value['PhotoP1']}}" alt="" >
@@ -27,9 +28,9 @@
                 <span class="sp-wrapper">RANK</span>
                 <span class="sp-wrapper">
                   <svg  viewBox="0 0 10vx 10vh"  >
-                    <text x="35%" y="1.5vh" class="three" fill="#FFFFFF">{{value['ActualRankingP1']}}</text>
-                    <text x="15%" y="1.3vh" class="one" fill="#FFFFFF">></text>
-                    <text x="5%" y="1.3vh" class="two" fill="#FFFFFF">></text>
+                    <text x="35%" y="1.8vh" class="three" fill="#FFFFFF">{{value['ActualRankingP1']}}</text>
+                    <text x="15%" y="1.7vh" class="one" fill="#FFFFFF">></text>
+                    <text x="5%" y="1.7vh" class="two" fill="#FFFFFF">></text>
                   </svg>
                 </span>
               </a>
@@ -39,9 +40,9 @@
                 <span class="sp-wrapper">HAND</span>
                 <span class="sp-wrapper">
                   <svg  viewBox="0 0 10vx 10vh"  >
-                    <text x="35%" y="1.5vh" class="three" fill="#FFFFFF">{{value['HandednessP1'][0]}}</text>
-                    <text x="15%" y="1.3vh" class="one" fill="#FFFFFF">></text>
-                    <text x="5%" y="1.3vh" class="two" fill="#FFFFFF">></text>
+                    <text x="35%" y="1.8vh" class="three" fill="#FFFFFF">{{value['HandednessP1'][0]}}</text>
+                    <text x="15%" y="1.7vh" class="one" fill="#FFFFFF">></text>
+                    <text x="5%" y="1.7vh" class="two" fill="#FFFFFF">></text>
                   </svg>
                 </span>
               </a>
@@ -51,9 +52,9 @@
                 <span class="sp-wrapper">ODD</span>
                 <span class="sp-wrapper">
                   <svg  viewBox="0 0 10vx 10vh"  >
-                    <text x="28%" y="1.5vh" class="three" fill="#FFFFFF">{{value['AvgP1']}}</text>
-                    <text x="15%" y="1.3vh" class="one" fill="#FFFFFF">></text>
-                    <text x="5%" y="1.3vh" class="two" fill="#FFFFFF">></text>
+                    <text x="28%" y="1.8vh" class="three" fill="#FFFFFF">{{value['AvgP1']}}</text>
+                    <text x="15%" y="1.7vh" class="one" fill="#FFFFFF">></text>
+                    <text x="5%" y="1.7vh" class="two" fill="#FFFFFF">></text>
                   </svg>
                 </span>
               </a>
@@ -66,7 +67,7 @@
               <span>ATP {{value['Location']}}</span>
           </div>
           <div class="icon">
-            <img id="icon-png" src="{{url_for('static', filename='versus-icon.png')}}" >
+            <img id="icon-png" src="{{url_for('static', filename='versus2.png')}}" >
           </div>
 
         </div>
@@ -77,38 +78,38 @@
             </div>
             <div class="wrapper-player2">
               <a class="cta" href="#">
-                <span class="sp-wrapper">RANK</span>
                 <span class="sp-wrapper">
                   <svg  viewBox="0 0 10vx 10vh"  >
-                    <text x="35%" y="1.5vh" class="three" fill="#FFFFFF">{{value['ActualRankingP2']}}</text>
-                    <text x="15%" y="1.3vh" class="one" fill="#FFFFFF">></text>
-                    <text x="5%" y="1.3vh" class="two" fill="#FFFFFF">></text>
+                    <text x="1%" y="1.8vh" class="three" fill="#FFFFFF">{{value['ActualRankingP2']}}</text>
+                    <text x="80%" y="1.7vh" class="one" fill="#FFFFFF"><</text>
+                    <text x="60%" y="1.7vh" class="two" fill="#FFFFFF"><</text>
                   </svg>
                 </span>
+                <span class="span-info">RANK</span>
               </a>
             </div>
             <div class="wrapper-player2">
               <a class="cta" href="#">
-                <span class="sp-wrapper">HAND</span>
                 <span class="sp-wrapper">
                   <svg  viewBox="0 0 10vx 10vh"  >
-                    <text x="35%" y="1.5vh" class="three" fill="#FFFFFF">{{value['HandednessP2'][0]}}</text>
-                    <text x="15%" y="1.3vh" class="one" fill="#FFFFFF">></text>
-                    <text x="5%" y="1.3vh" class="two" fill="#FFFFFF">></text>
+                    <text x="20%" y="1.8vh" class="three" fill="#FFFFFF">{{value['HandednessP2'][0]}}</text>
+                    <text x="80%" y="1.7vh" class="one" fill="#FFFFFF"><</text>
+                    <text x="60%" y="1.7vh" class="two" fill="#FFFFFF"><</text>
                   </svg>
                 </span>
+                <span class="span-info">HAND</span>
               </a>
             </div>
             <div class="wrapper-player2">
               <a class="cta" href="#">
-                <span class="sp-wrapper">ODD</span>
                 <span class="sp-wrapper">
                   <svg viewBox="0 0 10vx 10vh">
-                    <text x="28%" y="1.5vh" class="three" fill="#FFFFFF">{{value['AvgP2']}}</text>
-                    <text x="15%" y="1.3vh" class="one" fill="#FFFFFF">></text>
-                    <text x="5%" y="1.3vh" class="two" fill="#FFFFFF">></text>
+                    <text x="1%" y="1.8vh" class="three" fill="#FFFFFF">{{value['AvgP2']}}</text>
+                    <text x="80%" y="1.7vh" class="one" fill="#FFFFFF"><</text>
+                    <text x="60%" y="1.7vh" class="two" fill="#FFFFFF"><</text>
                   </svg>
                 </span>
+                <span class="span-info">ODD</span>
               </a>
             </div>
           </div>
