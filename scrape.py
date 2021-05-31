@@ -2,19 +2,41 @@ import flask
 import pandas as pd
 import numpy as np
 #from tensorflow.keras.models import load_model
-from keras.models import load_model
+#from keras.models import load_model
+#from tensorflow import keras
+#from keras.models import load_model
+import tensorflow as tf
 import pickle
 import re
 from time import sleep
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
+from git import Repo
 
-model_MLP=load_model('model/model_MLP.h5')
+
+PATH_OF_GIT_REPO = r'/Users/pierremecchia/Documents/Documents/machine_learning/projects/tennis_betting/webapp'  # make sure .git folder is properly configured
+
+COMMIT_MESSAGE = 'Update MatchesDay.csv'
+
+def git_push():
+    try:
+        repo = Repo(PATH_OF_GIT_REPO)
+        repo.git.add(update=True)
+        repo.index.commit(COMMIT_MESSAGE)
+        repo.git.push("origin", "master")
+    except:
+        print('Some error occured while pushing the code')
+
+
+
+#model_MLP=load_model('model/model_MLP.h5')
 #model_MLP=models.load_model('model')
-df_selected_players = pd.read_pickle("dataframes/df_selected_players.pkl")
+#model_MLP = keras.models.load_model('model/model_MLP')
+model_MLP = tf.keras.models.load_model(r'/Users/pierremecchia/Documents/Documents/machine_learning/projects/tennis_betting/model/model_MLP')
+df_selected_players = pd.read_pickle(r'/Users/pierremecchia/Documents/Documents/machine_learning/projects/tennis_betting/dataframes/df_selected_players.pkl')
 
 # Load data (deserialize)
-with open('dataframes/label_dictionnary.pkl', 'rb') as handle:
+with open(r'/Users/pierremecchia/Documents/Documents/machine_learning/projects/tennis_betting/dataframes/label_dictionnary.pkl', 'rb') as handle:
     label_dictionnary = pickle.load(handle)
 
 def checkName(Name):
@@ -97,7 +119,7 @@ def DayMatches():
 
     for href in list_href:
 
-        driver = webdriver.Chrome(executable_path=r'/Users/pierremecchia/Desktop/chromedriver',chrome_options=chrome_options)
+        driver = webdriver.Chrome(executable_path=r'/Users/pierremecchia/Desktop/chromedriver',options=chrome_options)
         #driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"),chrome_options=chrome_options)
         driver.get(href)
         sleep(3)
@@ -109,6 +131,8 @@ def DayMatches():
         location=location.replace('ATP ','')
         location=re.sub(r'\([^)]*\)', '', location)#delete special characters
         location=location.rstrip().lstrip() #delete white space at the beginning and end of string
+        if location =='French Open':
+            location='Paris'
 
         matches=driver.find_elements_by_xpath("//*[@id='tournamentTable']/tbody/tr") #List of matches in the tournament
         doScrap=False
@@ -141,8 +165,10 @@ def DayMatches():
                                 #find winner of the match
                                 winnerP1=match.find_element_by_xpath('./td[3]').text
 
-                                if ("ret" in winnerP1) or ("canc" in winnerP1): #no winner for canceled or retirement matches
-                                    winnerP1=np.nan
+                                if ("ret" in winnerP1) : #no winner for retirement matches
+                                    winnerP1=2
+                                elif ("canc" in winnerP1): #no winner for canceled
+                                    winnerP1=3
                                 elif (("result-ok" not in odd1_className) & ("result-ok" not in odd2_className)): #match not finished
                                     winnerP1=np.nan
                                 elif int(winnerP1[0])<int(winnerP1[2]):
@@ -241,10 +267,12 @@ def TournamentsData(locations_list):
                     surface=np.nan
 
 
+
                 list_series.append(series)
                 list_surface.append(surface)
                 list_court.append(court)
                 list_location.append(town)
+
         except:
             continue
     driver.quit()
@@ -309,8 +337,8 @@ def Validation_Labelizer(df):
 def data():
     df_matchs=DayMatches() #Scrape atp matches of the day
     locations_list=df_matchs['Location'].unique() #location list of tournaments of the day
-    df_tournaments=TournamentsData(locations_list) # scrape additionnals datas of the tournaments of the day
 
+    df_tournaments=TournamentsData(locations_list) # scrape additionnals datas of the tournaments of the day
     df_validation=df_matchs.merge(df_tournaments,on="Location") #merge
     df_validation['Player1']=df_validation.apply(lambda x: PlayerNotFound(x["Player1"],df_selected_players),axis=1)
     df_validation['Player2']=df_validation.apply(lambda x: PlayerNotFound(x["Player2"],df_selected_players),axis=1)
@@ -322,20 +350,23 @@ def data():
     df_validation=df_validation[['Location','Player1','Player2','Series', 'Court', 'Surface', 'ActualRankingP1', 'ActualRankingP2', 'AvgP1', 'AvgP2','HeightP1', 'HandednessP1', 'NewNameP1', 'IdP1','PhotoP1', 'HeightP2', 'HandednessP2', 'NewNameP2', 'IdP2','PhotoP2','P1Winner']]#ordering columns
 
     df_html=df_validation.copy()
+
     df_validation=df_validation.drop(["Player1","Player2","NewNameP1","NewNameP2","PhotoP1","PhotoP2"],axis=1) # features already present in idP1 and idP2
     df_validation['AvgP1']=df_validation.AvgP1.astype(float)#convert column to float
     df_validation['AvgP2']=df_validation.AvgP2.astype(float)#convert column to float
     df_validation=df_validation[df_validation['IdP1'].notna()&df_validation['IdP2'].notna()&df_validation['ActualRankingP1'].notna()&df_validation['ActualRankingP2'].notna()] #keep rows without NaN values in Id columns
     df_validation=Validation_Labelizer(df_validation) #Labelizer
     X_validation=df_validation.drop(['P1Winner'],axis=1)
+
     df_validation["Prediction"]=model_MLP.predict(X_validation)
 
     df_html=df_html[df_html['IdP1'].notna()&df_html['IdP2'].notna()&df_html['ActualRankingP1'].notna()&df_html['ActualRankingP2'].notna()] #keep rows without NaN values in Id columns
     df_html['PredictP1']=df_validation['Prediction']
     df_html['ActualRankingP1']=df_html.ActualRankingP1.astype(int)
     df_html['ActualRankingP2']=df_html.ActualRankingP2.astype(int)
-
+    print(df_html)
     return df_html
 
 dataframe_app=data()
-dataframe_app.to_csv('webapp/static/MatchesDay.csv',index=False)
+dataframe_app.to_csv(r'/Users/pierremecchia/Documents/Documents/machine_learning/projects/tennis_betting/webapp/MatchesDay.csv',index=False)
+git_push()
