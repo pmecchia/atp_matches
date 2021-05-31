@@ -7,7 +7,7 @@ import pandas as pd
 atp_prediction = flask.Flask(__name__, template_folder='templates')
 
 
-df_matches=pd.read_csv('static/MatchesDay.csv')
+df_matches=pd.read_csv('MatchesDay.csv')
 #df_matches['ActualRankingP1']=df_matches.ActualRankingP1.astype(int)
 #df_matches['ActualRankingP2']=df_matches.ActualRankingP2.astype(int)
 

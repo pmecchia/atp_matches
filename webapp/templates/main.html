@@ -15,11 +15,11 @@
     <div class="match">
       <div class="opponents">
         {%if value['Surface']=="Clay"%}
-          <img  class="background" src="{{url_for('static', filename='clay-background.jpg')}}" >
+          <img  class="background" src="{{url_for('static', filename='/css/images/clay-background.jpg')}}" >
         {%elif value['Surface']=="Grass"%}
-          <img  class="background" src="{{url_for('static', filename='grass.jpeg')}}" >
+          <img  class="background" src="{{url_for('static', filename='/css/images/grass.jpeg')}}" >
         {%elif value['Surface']=="Hard"%}
-          <img  class="background" src="{{url_for('static', filename='hard.jpeg')}}" >
+          <img  class="background" src="{{url_for('static', filename='/css/images/hard.jpeg')}}" >
         {%endif%}
 
         <div class="player">
@@ -74,7 +74,7 @@
               <span>ATP {{value['Location']}}</span>
           </div>
           <div class="icon">
-            <img id="icon-png" src="{{url_for('static', filename='versus2.png')}}" >
+            <img id="icon-png" src="{{url_for('static', filename='/css/images/versus.png')}}" >
           </div>
 
         </div>
@@ -133,13 +133,17 @@
           <span id="prediction">PREDICTION</span>
 
           {%if ((value['P1Winner'] == 1) and (value['PredictP1']>0.5))  %}
-            <img id="check-png" src="{{url_for('static', filename='checkmark.png')}}" >
+            <img id="check-png" src="{{url_for('static', filename='/css/images/checkmark.png')}}" >
           {%elif ((value['P1Winner'] == 0) and (value['PredictP1'] < 0.5)) %}
-            <img id="check-png" src="{{url_for('static', filename='checkmark.png')}}" >
+            <img id="check-png" src="{{url_for('static', filename='/css/images/checkmark.png')}}" >
           {%elif ((value['P1Winner'] == 1) and (value['PredictP1'] < 0.5)) %}
-            <img id="cross-png" src="{{url_for('static', filename='crossmark.png')}}" >
+            <img id="cross-png" src="{{url_for('static', filename='/css/images/crossmark.png')}}" >
           {%elif ((value['P1Winner'] == 0) and (value['PredictP1'] > 0.5)) %}
-            <img id="cross-png" src="{{url_for('static', filename='crossmark.png')}}" >
+            <img id="cross-png" src="{{url_for('static', filename='/css/images/crossmark.png')}}" >
+          {%elif (value['P1Winner'] == 3) %}
+            <p id="not-completed">Match cancelled</p>
+          {%elif (value['P1Winner'] == 2) %}
+            <p id="not-completed">Player retired</p>
           {%else%}
             <p id="not-completed">Match not completed</p>
           {% endif %}
