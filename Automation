@@ -1,0 +1,5 @@
+#!/bin/sh
+
+Python /Users/pierremecchia/Documents/Documents/machine_learning/projects/tennis_betting/scrape.py
+
+exit 0
