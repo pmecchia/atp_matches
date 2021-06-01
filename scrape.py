@@ -1,6 +1,7 @@
 import flask
 import pandas as pd
 import numpy as np
+import datetime
 #from tensorflow.keras.models import load_model
 #from keras.models import load_model
 #from tensorflow import keras
@@ -223,55 +224,74 @@ def TournamentsData(locations_list):
     driver.get(url_tourn)
     sleep(4)
 
-    #list all tournaments in the current month
-    month_tournament=driver.find_elements_by_xpath("//*[@id='contentAccordionWrapper']/div[contains(@class,'expand')][1]/div[2]/div/table/tbody/tr")
-
     list_series=[]
     list_court=[]
     list_location=[]
     list_surface=[]
 
-    for tournament in month_tournament:
+
+    #list all tournaments in the current month
+
+    month_tournament=driver.find_elements_by_xpath("//*[@id='contentAccordionWrapper']/div[contains(@class,'expand')][1]/div[2]/div/table/tbody/tr")
+
+    #tournaments from previous month, needed for tournaments played on two months
+
+    previous_month_tournament=driver.find_elements_by_xpath("//*[@id='contentAccordionWrapper']/div[not(contains(@class,'expand'))]")
+    last_month=len(previous_month_tournament)-1
+    previous_month_tournament=driver.find_elements_by_xpath("//*[@id='contentAccordionWrapper']/div[%d]/div[2]/div/table/tbody/tr"%last_month)
+
+    list_tournaments=previous_month_tournament+month_tournament #current and previous mounth tournaments
+
+    for tournament in list_tournaments:
         try:
             #scrape location for each tournament in the list
-            location=tournament.find_element_by_xpath('./td[2]/span[1]').text
+            location=tournament.find_element_by_xpath('./td[2]/span[1]')
+            location=location.get_attribute("innerText")
             town=location.split(",")[0]
 
             if town in locations_list: #identify tournaments that we have to scrape
-                try:
-                    #define the serie of the tournament thanks to the image source
-                    series=tournament.find_element_by_xpath('./td[1]/img').get_attribute("src")
-                    if "250.png" in series:
-                        series="ATP250"
-                    elif "500.png" in series:
-                        series="ATP500"
-                    elif "1000.png" in series:
-                        series="Masters 1000"
-                    elif "grandslam.png" in series:
-                        series="Grand Slam"
-                    elif "finals.svg" in series:
-                        series="ATP Finals"
-                    else:
+                date=tournament.find_element_by_xpath('./td[2]/span[2]')
+                date=date.get_attribute("innerText")
+                end_date=date.split(" - ")[1] #end tournament date
+                start_date=date.split(" - ")[0]
+                now = datetime.datetime.now().date() #today date
+                end_date=datetime.datetime.strptime(end_date, "%Y.%m.%d").date() #datetime format
+                start_date=datetime.datetime.strptime(start_date, "%Y.%m.%d").date() #datetime format
+                if end_date >= now >= start_date: #check if tournament is currently being played
+                    try:
+                        #define the serie of the tournament thanks to the image source
+                        series=tournament.find_element_by_xpath('./td[1]/img').get_attribute("src")
+                        if "250.png" in series:
+                            series="ATP250"
+                        elif "500.png" in series:
+                            series="ATP500"
+                        elif "1000.png" in series:
+                            series="Masters 1000"
+                        elif "grandslam.png" in series:
+                            series="Grand Slam"
+                        elif "finals.svg" in series:
+                            series="ATP Finals"
+                        else:
+                            series=np.nan
+                    except:
                         series=np.nan
-                except:
-                    series=np.nan
-                try:
-                    #scrape court and surface of the tournament
-                    playground=tournament.find_element_by_xpath('./td[3]/table/tbody/tr/td[2]/div/div').text
-                    playground=playground.split(" ")
-                    court=playground[0]
-                    surface=playground[1]
+                    try:
+                        #scrape court and surface of the tournament
+                        playground=tournament.find_element_by_xpath('./td[3]/table/tbody/tr/td[2]/div/div')
+                        playground=playground.get_attribute("innerText")
+                        playground=playground.split(" ")
+                        court=playground[0]
+                        surface=playground[1]
 
-                except:
-                    court=np.nan
-                    surface=np.nan
-
+                    except:
+                        court=np.nan
+                        surface=np.nan
 
 
-                list_series.append(series)
-                list_surface.append(surface)
-                list_court.append(court)
-                list_location.append(town)
+                    list_series.append(series)
+                    list_surface.append(surface)
+                    list_court.append(court)
+                    list_location.append(town)
 
         except:
             continue
@@ -279,7 +299,7 @@ def TournamentsData(locations_list):
 
     loc_dict={"Location":list_location,"Series":list_series,"Court":list_court,"Surface":list_surface} #create a dictionnary
     df_tournaments=pd.DataFrame(loc_dict) # convert dictionnary into pandas dataframe
-
+    print(loc_dict)
     return df_tournaments
 
 
@@ -337,7 +357,6 @@ def Validation_Labelizer(df):
 def data():
     df_matchs=DayMatches() #Scrape atp matches of the day
     locations_list=df_matchs['Location'].unique() #location list of tournaments of the day
-
     df_tournaments=TournamentsData(locations_list) # scrape additionnals datas of the tournaments of the day
     df_validation=df_matchs.merge(df_tournaments,on="Location") #merge
     df_validation['Player1']=df_validation.apply(lambda x: PlayerNotFound(x["Player1"],df_selected_players),axis=1)
@@ -357,7 +376,6 @@ def data():
     df_validation=df_validation[df_validation['IdP1'].notna()&df_validation['IdP2'].notna()&df_validation['ActualRankingP1'].notna()&df_validation['ActualRankingP2'].notna()] #keep rows without NaN values in Id columns
     df_validation=Validation_Labelizer(df_validation) #Labelizer
     X_validation=df_validation.drop(['P1Winner'],axis=1)
-
     df_validation["Prediction"]=model_MLP.predict(X_validation)
 
     df_html=df_html[df_html['IdP1'].notna()&df_html['IdP2'].notna()&df_html['ActualRankingP1'].notna()&df_html['ActualRankingP2'].notna()] #keep rows without NaN values in Id columns
