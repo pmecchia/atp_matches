@@ -6,6 +6,10 @@ Create a web application to predict Association of Tennis Professionals (ATP)  W
 
 ## 🕵️‍♂️ Description
 
+I worked in notebooks in order to create a player dataframe and a machine learning model (cf Clean Notebook.ipynb).
+You can find the player Dataframe saved in pickle format in the dataframes directory .
+Concerning the model, I chosed to work with a multilayer perceptron saved in model directory.
+
 ## 🕐 Automation
 I failed to make a completely stand-alone application.The reason is that from the Heroku server I couldn't scrape websites I use.
 
@@ -22,3 +26,10 @@ The drawback is that my computer should be switch on to upadate my webapp.
 ## :desktop_computer: How to access ?
 
 Link: <a href="https://atp-prediction.herokuapp.com/" target="_blank">https://atp-prediction.herokuapp.com/</a>
+
+### Preview 1
+![webapp preview](Webapp_preview.png)
+
+
+### Preview 2
+![webapp preview](Webapp_preview2.png)
