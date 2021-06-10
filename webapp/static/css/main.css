@@ -38,6 +38,8 @@ span.title{
   margin: 0.5%;
 }
 .match{
+  display: flex;
+  flex-direction: column;
   background-color: #f7f7f7;
   margin-bottom: 6vh;
   box-shadow: 0 1.5vw 2.5vw rgba(0,0,0,0.8);
@@ -48,14 +50,13 @@ span.title{
 
 .opponents{
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  height:56.5vh;
-  padding-left: 10%;
-  padding-right: 10%;
+  /*height:56.5vh;*/
+  /*padding-left: 10%;
+  padding-right: 10%;*/
   position: relative;
   overflow: hidden;
-  /*background-image: url(../clay-background.jpg);
-  background-position: center;*/
 
 }
 
@@ -68,7 +69,7 @@ span.title{
 
 div.prediction{
   display: flex;
-  height: 15vh;
+  /*height: 15vh;*/
   border-bottom: solid 0.2vh #cdd1ce;
   border-top:solid 0.2vh #cdd1ce;
   flex-direction: row;
@@ -104,10 +105,16 @@ div.prediction-title{
 }
 
 div.player{
-  display: flex;
+  display: flex ;
+  flex-direction: row;
+  width:40%;
   position: relative;
   z-index: 2;
 
+}
+
+.player-photo{
+  align-self: flex-end;
 }
 
 div.versus{
@@ -117,6 +124,7 @@ div.versus{
   align-items: center;
   position: relative;
   z-index: 2;
+  width: 20%;
 }
 
 div.location{
@@ -128,23 +136,30 @@ div.location{
 }
 
 div.player-name{
-
+  display: flex;
+  flex-direction: column-reverse;
+  height: 70%;
   font-size: 1.6vw;
   font-weight: bold;
-  padding-bottom:5vh;
+  padding-bottom:7%;
   font-family: 'brave-eightyone';
 
 
 }
 #player2-name{
   text-align: right;
+  flex-direction: column;
+  justify-content: flex-end;
+
 }
 #player1-name{
   text-align: left;
 }
 div.player-info{
-  align-self: flex-end;
-  width:25vw;
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  height: 100%;
   padding-right: 1vw;
 
 }
@@ -155,18 +170,20 @@ div.player-info{
 .player-body{
   /*position:absolute;
   padding-left: 190px;*/
+  display: flex;
   z-index:0;
   width:14.5vw;
-  height:56.5vh;
+  /*height:56.5vh;*/
 }
 
 .player-face{
   /*position:absolute;
   padding-left: 190px;*/
+  display: flex;
   z-index:0;
   width:14.5vw;
-  height:33vh;
-  padding-top: 11vh;
+  /*height:33vh;
+  padding-top: 11vh;*/
 }
 
 #icon-png{
@@ -174,7 +191,7 @@ div.player-info{
   padding-left: 120px;*/
   z-index:1;
   width:13.5vw;
-  height:30vh;
+  /*height:30vh;*/
 }
 #check-png{
   width: 4vw;
@@ -192,6 +209,7 @@ div.player-info{
 
 
 .wrapper-player1{
+  height: 10%;
   display: flex;
   padding-bottom: 1.5vh;
 }
@@ -199,11 +217,12 @@ div.player-info{
   display: flex;
   padding-bottom: 1.5vh;
   justify-content: flex-end;
+  height: 10%;
 }
 
 .wrapper-player1 .cta {
   display: flex;
-  padding: 1vh 1.5vw;
+  padding: 1% 5%;
   text-decoration: none;
   font-family: 'brave-eightyone';
   font-size: 0.8vw;
@@ -212,11 +231,12 @@ div.player-info{
   transition: 1s;
   box-shadow: 1vh 1vh 0 black;
   transform: skewX(-15deg);
+  align-items: center;
 }
 
 .wrapper-player2 .cta{
   display: flex;
-  padding: 1vh 1.5vw;
+  padding: 1% 5%;
   text-decoration: none;
   font-family: 'brave-eightyone';
   font-size: 0.8vw;
@@ -225,6 +245,7 @@ div.player-info{
   transition: 1s;
   box-shadow: -1vh 1vh 0 black;
   transform: skewX(15deg);
+  align-items: center;
 }
 
 
@@ -287,6 +308,7 @@ div.player-info{
   margin-left: 1vw;*/
   position: relative;
 }
+
 
 /**************SVG****************/
 .wrapper-player1 svg{
