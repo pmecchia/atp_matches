@@ -232,6 +232,8 @@ div.player-info{
   box-shadow: 1vh 1vh 0 black;
   transform: skewX(-15deg);
   align-items: center;
+  flex-direction: row;
+  width: 17%;
 }
 
 .wrapper-player2 .cta{
@@ -246,6 +248,8 @@ div.player-info{
   box-shadow: -1vh 1vh 0 black;
   transform: skewX(15deg);
   align-items: center;
+  flex-direction: row;
+  width: 17%;
 }
 
 
@@ -256,30 +260,44 @@ div.player-info{
 .cta:hover {
     transition: 0.5s;
     box-shadow: 1.5vh 1vh 0 #FBC638;
+    width: 30%;
 }
 
-.wrapper-player1 .cta span:nth-child(2) {
+.wrapper-player1 .cta div {
     transition: 0.5s;
     margin-right: 0px;
 }
 
 
-.wrapper-player1 .cta:hover  span:nth-child(2) {
+.wrapper-player1 .cta:hover  .svg-wrapper  {
     transition: 0.5s;
     margin-right: 3vw;
+    width: 75%;
 }
 
-.wrapper-player2 .cta span:nth-child(1) {
+.wrapper-player2 .cta div {
     transition: 0.5s;
     margin-right: 0px;
 }
 
 
-.wrapper-player2 .cta:hover  span:nth-child(1) {
+.wrapper-player2 .cta:hover  .svg-wrapper {
     transition: 0.5s;
+    width: 75%;
+
     /*width:3.5vw;
     height:2vh;
     /*margin-right: 3vw;*/
+}
+
+.sp-wrapper{
+  display: flex;
+  width: 50%;
+}
+
+.svg-wrapper{
+  display: flex;
+  width: 50%;
 }
 
 .wrapper-player1 .sp-wrapper {
@@ -291,65 +309,67 @@ div.player-info{
 
 }
 
+.wrapper-player1 .svg-wrapper {
+  transform: skewX(15deg)
+}
+
+.wrapper-player2 .svg-wrapper {
+  transform: skewX(-15deg);
+
+}
+
 .span-info{
   transform: skewX(-15deg);
   margin-left: 1vw;
   font-family: 'brave-eightyone';
 }
 
-.wrapper-player1 span:nth-child(2) {
-  width: 0.5vw;
-  margin-left: 1vw;
-  position: relative;
-}
 
-.wrapper-player2 span:nth-child(1) {
-  /*width: 0.5vw;
-  margin-left: 1vw;*/
-  position: relative;
-}
 
 
 /**************SVG****************/
 .wrapper-player1 svg{
-  width:7vw;
+  width:10em;
   height:2vh;
   /*outline: 1px solid red*/
 }
+
+  /*outline: 1px solid red*/
+
 
 .wrapper-player2 svg{
-  width:0.5vw;
+  width:10em;
   height:2vh;
   /*outline: 1px solid red*/
 }
-
+/*
 .wrapper-player2 .cta:hover svg{
   width:3.5vw;
   height:2vh;
-}
+}*/
 
 text.one {
     font-size: 0.8vw;
     transition: 0.4s;
-    transform: translateX(-15%);
+    transform: translateX(86%);
 }
 
 .wrapper-player2 text.one {
     font-size: 0.8vw;
     transition: 0.4s;
-    transform: translateX(-70%);
+    transform: translateX(-250%);
 }
 
 .wrapper-player2 text.two {
     font-size: 0.8vw;
     transition: 0.4s;
-    transform: translateX(-50%);
+    transform: translateX(60%);
 }
 
 .wrapper-player2 text.three {
     font-size: 0.8vw;
     transition: 0.5s;
-    transform: translateX(110%);
+    transform: translateX(405%);
 }
 
 text.two {
@@ -360,7 +380,7 @@ text.two {
 text.three {
     font-size: 0.8vw;
     transition: 0.5s;
-    transform: translateX(-100%);
+    transform: translateX(-400%);
 
 }
 

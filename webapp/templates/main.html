@@ -33,37 +33,37 @@
             <div class="wrapper-player1">
               <a class="cta" href="#">
                 <span class="sp-wrapper">Rank</span>
-                <span class="sp-wrapper">
-                  <svg  viewBox="0 0 10vx 10vh"  >
-                    <text x="35%" y="90%" class="three" fill="#FFFFFF">{{value['ActualRankingP1']}}</text>
-                    <text x="15%" y="90%" class="one" fill="#FFFFFF">></text>
-                    <text x="5%" y="90%" class="two" fill="#FFFFFF">></text>
+                <div class="svg-wrapper">
+                  <svg  viewBox="0 0 10 10"  >
+                    <text x="10" y="10" class="three" fill="#FFFFFF">{{value['ActualRankingP1']}}</text>
+                    <text x="0" y="10" class="one" fill="#FFFFFF">></text>
+                    <text x="-10" y="10" class="two" fill="#FFFFFF">></text>
                   </svg>
-                </span>
+                </div>
               </a>
             </div>
             <div class="wrapper-player1">
               <a class="cta" href="#">
                 <span class="sp-wrapper">Hand</span>
-                <span class="sp-wrapper">
-                  <svg  viewBox="0 0 10vx 10vh"  >
-                    <text x="35%" y="90%" class="three" fill="#FFFFFF">{{value['HandednessP1'][0]}}</text>
-                    <text x="15%" y="90%" class="one" fill="#FFFFFF">></text>
-                    <text x="5%" y="90%" class="two" fill="#FFFFFF">></text>
+                <div class="svg-wrapper">
+                  <svg  viewBox="0 0 10 10"  >
+                    <text x="10" y="10" class="three" fill="#FFFFFF">{{value['HandednessP1'][0]}}</text>
+                    <text x="0" y="10" class="one" fill="#FFFFFF">></text>
+                    <text x="-10" y="10" class="two" fill="#FFFFFF">></text>
                   </svg>
-                </span>
+                </div>
               </a>
             </div>
             <div class="wrapper-player1">
               <a class="cta" href="#">
                 <span class="sp-wrapper">Odd</span>
-                <span class="sp-wrapper">
-                  <svg  viewBox="0 0 10vx 10vh"  >
-                    <text x="28%" y="90%" class="three" fill="#FFFFFF">{{value['AvgP1']}}</text>
-                    <text x="15%" y="90%" class="one" fill="#FFFFFF">></text>
-                    <text x="5%" y="90%" class="two" fill="#FFFFFF">></text>
+                <div class="svg-wrapper">
+                  <svg  viewBox="0 0 10 10"  >
+                    <text x="10" y="10" class="three" fill="#FFFFFF">{{value['AvgP1']}}</text>
+                    <text x="0" y="10" class="one" fill="#FFFFFF">></text>
+                    <text x="-10" y="10" class="two" fill="#FFFFFF">></text>
                   </svg>
-                </span>
+                </div>
               </a>
             </div>
           </div>
@@ -85,38 +85,38 @@
             </div>
             <div class="wrapper-player2">
               <a class="cta" href="#">
-                <span class="sp-wrapper">
-                  <svg  viewBox="0 0 10vx 10vh"  >
-                    <text x="1%" y="90%" class="three" fill="#FFFFFF">{{value['ActualRankingP2']}}</text>
-                    <text x="80%" y="90%" class="one" fill="#FFFFFF"><</text>
-                    <text x="60%" y="90%" class="two" fill="#FFFFFF"><</text>
+                <div class="svg-wrapper">
+                  <svg  viewBox="0 0 10 10"  >
+                    <text x="-20" y="10" class="three" fill="#FFFFFF">{{value['ActualRankingP2']}}</text>
+                    <text x="20" y="10" class="one" fill="#FFFFFF"><</text>
+                    <text x="10" y="10" class="two" fill="#FFFFFF"><</text>
                   </svg>
-                </span>
-                <span class="span-info">Rank</span>
+                </div>
+                <span class="sp-wrapper">Rank</span>
               </a>
             </div>
             <div class="wrapper-player2">
               <a class="cta" href="#">
-                <span class="sp-wrapper">
-                  <svg  viewBox="0 0 10vx 10vh"  >
-                    <text x="20%" y="90%" class="three" fill="#FFFFFF">{{value['HandednessP2'][0]}}</text>
-                    <text x="80%" y="90%" class="one" fill="#FFFFFF"><</text>
-                    <text x="60%" y="90%" class="two" fill="#FFFFFF"><</text>
+                <div class="svg-wrapper">
+                  <svg  viewBox="0 0 10 10"  >
+                    <text x="-20" y="10" class="three" fill="#FFFFFF">{{value['HandednessP2'][0]}}</text>
+                    <text x="20" y="10" class="one" fill="#FFFFFF"><</text>
+                    <text x="10" y="10" class="two" fill="#FFFFFF"><</text>
                   </svg>
-                </span>
-                <span class="span-info">Hand</span>
+                </div>
+                <span class="sp-wrapper">Hand</span>
               </a>
             </div>
             <div class="wrapper-player2">
               <a class="cta" href="#">
-                <span class="sp-wrapper">
-                  <svg viewBox="0 0 10vx 10vh">
-                    <text x="1%" y="90%" class="three" fill="#FFFFFF">{{value['AvgP2']}}</text>
-                    <text x="80%" y="90%" class="one" fill="#FFFFFF"><</text>
-                    <text x="60%" y="90%" class="two" fill="#FFFFFF"><</text>
+                <div class="svg-wrapper">
+                  <svg viewBox="0 0 10 10">
+                    <text x="-20" y="10" class="three" fill="#FFFFFF">{{value['AvgP2']}}</text>
+                    <text x="20" y="10" class="one" fill="#FFFFFF"><</text>
+                    <text x="10" y="10" class="two" fill="#FFFFFF"><</text>
                   </svg>
-                </span>
-                <span class="span-info">Odd</span>
+                </div>
+                <span class="sp-wrapper">Odd</span>
               </a>
             </div>
           </div>
@@ -124,6 +124,7 @@
             <img class='{{"player-body" if "gladiator" in value['PhotoP2'] else "player-face"}}' src="{{value['PhotoP2']}}" alt="">
           </div>
         </div>
+
       </div>
       <div class="prediction">
         <div class="player-prediction">
@@ -156,7 +157,6 @@
     </div>
     {% endfor %}
   </div>
-
 </body>
 
 </html>
